@@ -1,26 +1,252 @@
 @import "tailwindcss";
 
+/* =========================
+   Runtime tokens (default: light)
+   ========================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light (fallback) — ajuste se quiser */
+  --background: #0b0c0f;         /* você pode trocar p/ claro se preferir */
+  --foreground: #ffffff;
+
+  --card: #16181d;
+  --card-foreground: #ffffff;
+
+  --popover: #16181d;
+  --popover-foreground: #ffffff;
+
+  /* Primary / Secondary */
+  --primary: #2c85fc;            /* 210 97% 59% */
+  --primary-foreground: #ffffff;
+
+  --secondary: #7ea4d7;          /* 217 69% 65% */
+  --secondary-foreground: #16181d;
+
+  /* Muted / Accent / Destructive */
+  --muted: #20242c;              /* 223 19% 16% */
+  --muted-foreground: #93979f;   /* 221 8% 62% */
+
+  --accent: #2debfc;             /* 189 96% 58% */
+  --accent-foreground: #16181d;
+
+  --destructive: #c94141;        /* ~ hsl(0 62% 50%) */
+  --destructive-foreground: #ffffff;
+
+  /* Border/Input/Ring */
+  --border: #20242c;
+  --input: #20242c;
+  --ring: #2c85fc;
+
+  /* Radius */
+  --radius: 12px;
+
+  /* Títulos/CTA */
+  --title-color: #e9eaec;
+  --subtitle-color: #d3d5d9;
+  --cta-button: #2266c1;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #2c85fc, #2debfc);
+  --gradient-secondary: linear-gradient(135deg, #16181d, #20242c);
+  --gradient-hero: linear-gradient(135deg, #0b0c0f, #101216);
+  --gradient-accent: linear-gradient(135deg, #2debfc, #7ea4d7);
+
+  --gradient-section-dark: linear-gradient(135deg, #0b0c0f, #101216);
+  --gradient-section-blue: linear-gradient(135deg, #0d284c, #101216);
+  --gradient-section-teal: linear-gradient(135deg, #0e474c, #14161a);
+  --gradient-section-subtle: linear-gradient(135deg, #101216, #14161a);
+
+  /* Sombras */
+  --shadow-glow: 0 0 40px rgba(44, 133, 252, 0.3);
+  --shadow-card: 0 8px 32px rgba(11, 12, 15, 0.6);
+  --shadow-elegant: 0 4px 20px rgba(11, 12, 15, 0.4);
+
+  /* Transição */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* =========================
+   Dark mode via media query
+   ========================= */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0b0c0f;
+    --foreground: #ffffff;
+
+    --card: #16181d;
+    --card-foreground: #ffffff;
+
+    --popover: #16181d;
+    --popover-foreground: #ffffff;
+
+    --primary: #2c85fc;
+    --primary-foreground: #ffffff;
+
+    --secondary: #7ea4d7;
+    --secondary-foreground: #16181d;
+
+    --muted: #20242c;
+    --muted-foreground: #93979f;
+
+    --accent: #2debfc;
+    --accent-foreground: #16181d;
+
+    --destructive: #c94141;
+    --destructive-foreground: #ffffff;
+
+    --border: #20242c;
+    --input: #20242c;
+    --ring: #2c85fc;
+
+    --title-color: #e9eaec;
+    --subtitle-color: #d3d5d9;
+    --cta-button: #2266c1;
+
+    --gradient-primary: linear-gradient(135deg, #2c85fc, #2debfc);
+    --gradient-secondary: linear-gradient(135deg, #16181d, #20242c);
+    --gradient-hero: linear-gradient(135deg, #0b0c0f, #101216);
+    --gradient-accent: linear-gradient(135deg, #2debfc, #7ea4d7);
+
+    --gradient-section-dark: linear-gradient(135deg, #0b0c0f, #101216);
+    --gradient-section-blue: linear-gradient(135deg, #0d284c, #101216);
+    --gradient-section-teal: linear-gradient(135deg, #0e474c, #14161a);
+    --gradient-section-subtle: linear-gradient(135deg, #101216, #14161a);
+
+    --shadow-glow: 0 0 40px rgba(44, 133, 252, 0.3);
+    --shadow-card: 0 8px 32px rgba(11, 12, 15, 0.6);
+    --shadow-elegant: 0 4px 20px rgba(11, 12, 15, 0.4);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =========================
+   Tailwind v4 — THEME inline
+   ========================= */
+@theme inline {
+  /* Cores → utilities text-*, bg-*, border-*, ring-* */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  /* Tipografia extra */
+  --color-title: var(--title-color);
+  --color-subtitle: var(--subtitle-color);
+
+  /* Radius → rounded-lg/md/sm */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Sombras → shadow-glow/card/elegant */
+  --shadow-glow: var(--shadow-glow);
+  --shadow-card: var(--shadow-card);
+  --shadow-elegant: var(--shadow-elegant);
+
+  /* Background images → bg-gradient-* */
+  --bg-image-gradient-primary: var(--gradient-primary);
+  --bg-image-gradient-secondary: var(--gradient-secondary);
+  --bg-image-gradient-hero: var(--gradient-hero);
+  --bg-image-gradient-accent: var(--gradient-accent);
+
+  /* Animações */
+  --animate-accordion-down: accordion-down 0.2s ease-out both;
+  --animate-accordion-up: accordion-up 0.2s ease-out both;
 }
+
+/* =========================
+   Keyframes
+   ========================= */
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+
+/* =========================
+   Base
+   ========================= */
+@layer base {
+  * { @apply border-border; }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 { @apply font-bold tracking-tight; }
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl lg:text-5xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+}
+
+/* =========================
+   Components helpers
+   ========================= */
+@layer components {
+  .hero-title { color: var(--title-color); }
+  .hero-subtitle { color: var(--subtitle-color); }
+
+  .cta-button {
+    background-color: var(--cta-button);
+    color: #fff;
+    transition: var(--transition-smooth);
+  }
+  .cta-button:hover { filter: brightness(1.05); }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .card-glow {
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid color-mix(in oklab, var(--border) 10%, transparent);
+    background-color: color-mix(in oklab, var(--card) 80%, transparent);
+  }
+
+  .btn-glow {
+    box-shadow: var(--shadow-glow);
+    transition: var(--transition-smooth);
+  }
+  .btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px rgba(44, 133, 252, 0.4);
+  }
+}
+
+/* =========================
+   Section helpers
+   ========================= */
+.section-dark   { background: var(--gradient-section-dark); }
+.section-blue   { background: var(--gradient-section-blue); }
+.section-teal   { background: var(--gradient-section-teal); }
+.section-subtle { background: var(--gradient-section-subtle); }
