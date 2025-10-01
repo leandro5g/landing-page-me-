@@ -1,8 +1,22 @@
 import { Button } from "@/components/button";
+import { trackEvent } from "@/lib/mixpanel";
+import { AppEvent } from "@/lib/mixpanel/interfaces/events";
 import { openWhatsApp } from "@/utils/openWhatsApp";
 import { ArrowRight } from "lucide-react";
 
 export function FinalCTASection() {
+  const handleCTAClick = () => {
+    trackEvent(AppEvent.CTA_CLICK, {
+      cta_id: "final_cta_start_growth_button",
+      cta_label: "Começar meu crescimento",
+      section: "final_cta",
+      metadata: {
+        timestamp: new Date().toISOString(),
+      },
+    });
+    openWhatsApp();
+  }
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-hero">
       <div className="max-w-4xl mx-auto text-center">
@@ -12,7 +26,7 @@ export function FinalCTASection() {
           evoluir agora.
         </p>
 
-        <Button onClick={openWhatsApp} size="lg" className="group cta-button">
+        <Button onClick={handleCTAClick} size="lg" className="group cta-button">
           Começar meu crescimento
           <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
         </Button>

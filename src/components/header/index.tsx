@@ -8,6 +8,8 @@ import { Menu, X } from "lucide-react";
 import { Button } from "../button";
 import { DesktopNavigation } from "./desktop-navigation";
 import { openWhatsApp } from "@/utils/openWhatsApp";
+import { trackEvent } from "@/lib/mixpanel";
+import { AppEvent } from "@/lib/mixpanel/interfaces/events";
 
 export function Header() {
   const { scrollToSection } = useScrollToSection();
@@ -22,6 +24,30 @@ export function Header() {
     [scrollToSection]
   );
 
+  const handleStartNowClick = () => {
+    trackEvent(AppEvent.CTA_CLICK, {
+      cta_id: "header_start_now_button",
+      cta_label: "Começar agora",
+      section: "header",
+      metadata: {
+        timestamp: new Date().toISOString(),
+      }
+    })
+    openWhatsApp();
+  }
+
+  const handleOpenMenu = () => {
+    trackEvent(AppEvent.BUTTON_CLICK, {
+      cta_id: "header_menu_button",
+      cta_label: isMenuOpen ? "Fechar menu" : "Abrir menu",
+      section: "header_mobile",
+      metadata: {
+        timestamp: new Date().toISOString(),
+      }
+    })
+    setIsMenuOpen(!isMenuOpen);
+  }
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,14 +57,14 @@ export function Header() {
           <DesktopNavigation scrollToSection={handleScrollToSection} />
 
           <div className="hidden md:block">
-            <Button onClick={openWhatsApp} variant="default" size="sm">
+            <Button onClick={handleStartNowClick} variant="default" size="sm">
               Começar agora
             </Button>
           </div>
 
           <div className="md:hidden">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={handleOpenMenu}
               className="text-foreground hover:text-primary p-2 rounded-md"
               aria-label="Toggle menu"
             >

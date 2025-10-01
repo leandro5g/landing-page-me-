@@ -1,7 +1,13 @@
+"use client";
+
+import { initMixpanel } from "@/lib/mixpanel";
 import { LandingPage } from "@/templates/landing-page";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <LandingPage />
-  );
+  useEffect(() => {
+    initMixpanel();
+  }, []);
+
+  return <LandingPage />;
 }

@@ -1,8 +1,21 @@
 import { Button } from "@/components/button";
+import { trackEvent } from "@/lib/mixpanel";
+import { AppEvent } from "@/lib/mixpanel/interfaces/events";
+import { openWhatsApp } from "@/utils/openWhatsApp";
 import { ArrowRight } from "lucide-react";
 
 export function BetaOfferSection() {
-  const handleCTAClick = () => {};
+  const handleCTAClick = () => {
+    trackEvent(AppEvent.CTA_CLICK, {
+      cta_id: "beta_offer_participate_button",
+      cta_label: "Participar do Beta",
+      section: "beta_offer",
+      metadata: {
+        timestamp: new Date().toISOString(),
+      },
+    });
+    openWhatsApp();
+  };
 
   return (
     <section

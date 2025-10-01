@@ -2,6 +2,8 @@
 
 import { Badge } from "@/components/badge";
 import { Button } from "@/components/button";
+import { trackEvent } from "@/lib/mixpanel";
+import { AppEvent } from "@/lib/mixpanel/interfaces/events";
 import { openWhatsApp } from "@/utils/openWhatsApp";
 import { ArrowRight } from "lucide-react";
 
@@ -12,6 +14,17 @@ const badges = [
 ];
 
 export function HeroSection() {
+  const handlePressHeroCTA = () => {
+    trackEvent(AppEvent.CTA_CLICK, {
+      cta_id: "hero_start_now_button",
+      cta_label: "Quero começar meu crescimento",
+      section: "hero",
+      metadata: {
+        timestamp: new Date().toISOString(),
+      },
+    });
+    openWhatsApp();
+  };
 
   return (
     <section
@@ -46,7 +59,7 @@ export function HeroSection() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              onClick={openWhatsApp}
+              onClick={handlePressHeroCTA}
               size="lg"
               className="group cta-button"
             >
